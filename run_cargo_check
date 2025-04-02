@@ -1,0 +1,19 @@
+#!/bin/bash
+
+dir=$(dirname $(readlink -f "$0"))
+
+proj_dir="$1"
+if [ ! -d "$proj_dir" ]; then
+    echo "Project directory doesn't exist" >&2
+    exit 1
+fi
+proj_dir=$(realpath "$proj_dir")
+cd "$proj_dir" || exit 1
+
+#sudo docker run --rm -i -u$(id -u):$(id -g) -v $(pwd):/project -w /project rust:1.85.1-slim-bookworm cargo check > "$dir/.docker.log" 2>&1
+podman run --rm -i -v "$proj_dir:/project" -w /project 'docker.io/rust:1.85.1-slim-bookworm' cargo check > "$dir/.check.log" 2>&1
+
+if [ $? -ne 0 ]; then
+``    cat "$dir/.check.log"
+fi
+rm "$dir/.check.log"
