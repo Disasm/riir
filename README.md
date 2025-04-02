@@ -7,6 +7,8 @@
 Install Rust and Cargo if you haven't already. You can find the installation
 instructions [here](https://www.rust-lang.org/tools/install).
 
+Install Podman.
+
 Clone this repository:
 
 ```bash
