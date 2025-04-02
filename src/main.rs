@@ -172,7 +172,7 @@ async fn main() {
     dump_message(&system_message);
     chat.messages = vec![system_message];
 
-    chat.send_message("Please analyze the project in the source directory, but don't make any changes at this point.").await;
+    chat.send_message("Please analyze the project in the source directory and read all files you need to understand the implementation, but don't make any changes at this point.").await;
 
     let mut message = "Now create Rust project in the destination project directory so that it matches the implementation in the source project directory.".to_string();
     loop {
